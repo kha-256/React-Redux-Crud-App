@@ -13,10 +13,15 @@ const usersReducers =(state= initialState, action)=>{
                 ...state,
                 users: action.payload,
                 loading:false
-            }
+            };
+            case types.DELETE_USERS:
+                return{
+                    ...state,
+                    loading:false
+                };
         default:
             return state
     }
-}
+};
 
 export default usersReducers;

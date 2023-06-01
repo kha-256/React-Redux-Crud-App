@@ -1,32 +1,32 @@
 {
-    "users": [
-        {
-            "name": "Noor",
-            "address": "Japan",
-            "email": "Noor@gamil.com",
-            "contact": "013144124",
-            "id": 1
-        },
-        {
-            "name": "Habiba",
-            "address": "London",
-            "email": "Habiba@gamil.com",
-            "contact": "089246121",
-            "id": 2
-        },
-        {
-            "name": "Rameesha",
-            "address": "Pakistan",
-            "email": "Rameesha@gamil.com",
-            "contact": "046242340",
-            "id": 3
-        },
-        {
-            "name": "Laiba",
-            "address": "Japan",
-            "email": "Laiba@gamil.com",
-            "contact": "014341524",
-            "id": 4
-        }
-    ]
+  "users": [
+    {
+      "name": "Noor",
+      "address": "Japan",
+      "email": "Noor@gamil.com",
+      "contact": "013144124",
+      "id": 1
+    },
+    {
+      "name": "Habiba",
+      "address": "London",
+      "email": "Habiba@gamil.com",
+      "contact": "089246121",
+      "id": 2
+    },
+    {
+      "name": "Rameesha",
+      "address": "Pakistan",
+      "email": "Rameesha@gamil.com",
+      "contact": "046242340",
+      "id": 3
+    },
+    {
+      "name": "Laiba",
+      "address": "Japan",
+      "email": "Laiba@gamil.com",
+      "contact": "014341524",
+      "id": 4
+    }
+  ]
 }
