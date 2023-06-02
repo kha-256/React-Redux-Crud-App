@@ -38,66 +38,70 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 
 
 function Home() {
-{/*const navigate= useNavigate();
+  {/*const navigate= useNavigate();
 
 const goToAddUser=()=>{
 navigate('/addUser')
 }
 */}
 
-const styles = {
-  button: {
-    backgroundColor: 'rgb(230, 90, 90)',
-    marginRight: '5px',
-    '&:hover': {
-      backgroundColor: 'rgb(230, 90, 90)', // Change the background color on hover
+  const styles = {
+    button: {
+      backgroundColor: 'rgb(230, 90, 90)',
+      marginRight: '5px',
+      '&:hover': {
+        backgroundColor: 'rgb(230, 90, 90)', // Change the background color on hover
+      },
+
+
     },
-    
-    
-  },
 
-  addButton:{
-    backgroundColor: 'rgb(21, 67, 109)',
-    marginTop: '20px',
-    '&:hover': {
-      backgroundColor: 'rgb(21, 67, 109)', // Change the background color on hover
-    },
+    addButton: {
+      backgroundColor: 'rgb(21, 67, 109)',
+      marginTop: '20px',
+      '&:hover': {
+        backgroundColor: 'rgb(21, 67, 109)', // Change the background color on hover
+      },
+    }
+  };
+
+
+  let dispatch = useDispatch();
+
+  const { users } = useSelector(state => state.users)
+
+  useEffect(() => {
+    dispatch(loadUsers());
+  }, [])
+
+
+  const handleDelete = (id) => {
+    if (window.confirm("Are you sure, you want to delete the user")) {
+      dispatch(deleteUser(id))
+    }
+
   }
-};
 
 
-let dispatch = useDispatch();
+  const navigate = useNavigate();
 
-const {users} = useSelector(state=> state.users)
-
-useEffect(()=>{
-  dispatch(loadUsers());
-},[])
-
-
-const handleDelete=(id)=>{
-  if(window.confirm("Are you sure, you want to delete the user")){
-    dispatch(deleteUser(id))
+  const goToAddUser = () => {
+    navigate('/addUser')
   }
 
-}
-
-
-const navigate= useNavigate();
-
-const goToAddUser=()=>{
-navigate('/addUser')
-}
+  const goToEditUser = (id) => {
+    navigate(`/EditUser/${id}`)
+  }
   return (
     <div className="container">
       <h2 >User Information</h2>
 
-      <Button variant="contained" sx={styles.addButton} onClick={()=>{goToAddUser()}} >Add User</Button>
-      <TableContainer  component={Paper} sx={{ marginTop:5,minWidth:1100}}>
-        <Table sx={{ minWidth: 900,  }} aria-label="customized table">
+      <Button variant="contained" sx={styles.addButton} onClick={() => { goToAddUser() }} >Add User</Button>
+      <TableContainer component={Paper} sx={{ marginTop: 5, minWidth: 1100 }}>
+        <Table sx={{ minWidth: 900, }} aria-label="customized table">
           <TableHead>
             <TableRow>
-            <StyledTableCell >Name</StyledTableCell>
+              <StyledTableCell >Name</StyledTableCell>
               <StyledTableCell align="center">Email</StyledTableCell>
               <StyledTableCell align="center">Contact</StyledTableCell>
               <StyledTableCell align="center">Address</StyledTableCell>
@@ -114,16 +118,16 @@ navigate('/addUser')
                 <StyledTableCell align="center">{user.contact}</StyledTableCell>
                 <StyledTableCell align="center">{user.address}</StyledTableCell>
                 <StyledTableCell align="center">
-                <ButtonGroup variant="contained" aria-label="outlined primary button group">
-      <Button sx={styles.button} onClick={()=> handleDelete(user.id)}>Delete</Button>
-      <Button color="primary">Edit</Button>
-    </ButtonGroup>
+                  <ButtonGroup variant="contained" aria-label="outlined primary button group">
+                    <Button sx={styles.button} onClick={() => handleDelete(user.id)}>Delete</Button>
+                    <Button color="primary" onClick={() => goToEditUser(user.id)}>Edit</Button>
+                  </ButtonGroup>
                 </StyledTableCell>
 
-                
+
               </StyledTableRow>
             ))}
-          </TableBody> 
+          </TableBody>
         </Table>
       </TableContainer>
     </div>

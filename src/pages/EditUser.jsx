@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
-import './addUser.css'
+import React, { useEffect, useState } from 'react';
+import './EditUser.css'
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-import { useNavigate } from 'react-router-dom';
-import { addUser } from '../redux/action';
-import { useDispatch } from 'react-redux';
+import { useNavigate, useParams } from 'react-router-dom';
+import { updateUser, getSingleUser } from '../redux/action';
+import { useDispatch, useSelector } from 'react-redux';
 
-const AddUser = () => {
+const EditUser = () => {
 
   const styles = {
     Button: {
@@ -36,13 +36,24 @@ const AddUser = () => {
     contact: ""
   })
 
-  const [error, setError] = useState("")
-  const dispatch = useDispatch()
+  const [error, setError] = useState("");
+  let { id } = useParams();
+  const { user } = useSelector((state) => state.users)
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
 
   const { name, email, address, contact } = state
 
+  useEffect(() => {
+    dispatch(getSingleUser(id))
+  }, [id])
+
+  useEffect(() => {
+    if (user) {
+      setState({ ...user })
+    }
+  }, [user])
 
   const handleChangeInput = (e) => {
     let { name, value } = e.target
@@ -59,7 +70,7 @@ const AddUser = () => {
       console.log(error)
     }
     else {
-      dispatch(addUser(state));
+      dispatch(updateUser(state, id));
       navigate('/home');
       setError("")
     }
@@ -73,7 +84,7 @@ const AddUser = () => {
     <div className='container'>
 
       <Button variant="contained" sx={styles.backButton} onClick={() => goToHome()}>Back</Button>
-      <h1 style={{ marginBottom: 20 }}>Add User</h1>
+      <h1 style={{ marginBottom: 20 }}>Edit User</h1>
 
       {error && <p style={{ color: "red" }}>{error}</p>}
 
@@ -124,7 +135,7 @@ const AddUser = () => {
             onChange={handleChangeInput}
             sx={{ width: '45ch' }}
           /><br />
-          <Button variant="contained" type='submit' sx={{ width: '20ch' }} >Submit</Button>
+          <Button variant="contained" type='submit' sx={{ width: '20ch' }} >Update</Button>
         </Box><br />
       </form>
 
@@ -132,4 +143,4 @@ const AddUser = () => {
   )
 }
 
-export default AddUser
+export default EditUser
